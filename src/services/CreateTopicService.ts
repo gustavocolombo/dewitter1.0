@@ -1,4 +1,5 @@
 import prismaClient from "../prisma";
+import AppError from "../shared/errors/AppError";
 
 export default class CreateTopicService {
   async execute(name: string, description: string, user_id: string) {
@@ -6,7 +7,7 @@ export default class CreateTopicService {
       where: { id: user_id },
     });
 
-    if (!findUser) throw new Error("Usuário não encontrado");
+    if (!findUser) throw new AppError("Usuário não encontrado", 404);
 
     const topic = await prismaClient.topics.create({
       data: {

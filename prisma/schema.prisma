@@ -39,6 +39,7 @@ model Messages {
   id        String   @id @default(uuid())
   text      String
   likes     Int      @default(0)
+  replies   Int      @default(0)
   user_id   String
   topics_id String
   createdAt DateTime @default(now())
