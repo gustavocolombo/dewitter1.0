@@ -5,6 +5,7 @@ import CreateMessageController from "../controllers/CreateMessageController";
 import CreateReplyMessage from "../controllers/CreateReplyMessageController";
 import CreateTopicController from "../controllers/CreateTopicController";
 import OAuthenticateController from "../controllers/OAuthenticateController";
+import PaginateMessagesOfUserController from "../controllers/PaginateMessagesOfUserController";
 import ensureAuthenticateMiddleware from "../shared/middlewares/ensureAuthenticateMiddleware";
 
 const routes = Router();
@@ -34,6 +35,11 @@ routes.put(
   "/add-reply/:message_id",
   ensureAuthenticateMiddleware,
   new AddReplyInMessageController().handle
+);
+routes.get(
+  "/get-messages",
+  ensureAuthenticateMiddleware,
+  new PaginateMessagesOfUserController().handle
 );
 
 export default routes;
